@@ -1,0 +1,93 @@
+/* Item Critter */
+
+.item{
+	position: fixed;
+	width: 10rem;
+	height: 10rem;
+}
+
+.item img{
+	animation-iteration-count: infinite;
+}
+
+.item a{
+	color: black;
+	text-decoration: none;
+}
+
+.item_text{
+	padding: 0;
+	margin: 0;
+}
+
+.item_title{
+	font-size: 1.75rem;
+	letter-spacing: 0.1em;
+}
+
+
+.item_image{
+	width: 100%;
+}
+
+.text_container{
+	position: absolute;
+	letter-spacing: 0.05em;
+	top: calc(100% + 0.35rem);
+	left: 50%;
+	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+	visibility: hidden;
+	opacity: 0;
+	width: auto;
+	white-space: nowrap;
+	text-align: center;
+	pointer-events: none;
+}
+
+.above .text_container{
+	top: auto;
+	bottom: calc(100% - 0.5rem);
+}
+
+.item_category{
+	margin-top: 1rem;
+	user-select: none;
+	color: lightgray;
+	text-transform: lowercase;
+}
+
+.invasion .invasion,
+.capital .capital{
+	color: black;
+}
+
+.active_category{
+	text-transform: uppercase;
+}
+
+.categories{
+	width: 25rem;
+	display: flex;
+	font-size: 1rem;
+	justify-content: space-between;
+}
+
+.item_link:focus{
+	z-index: 10;
+}
+.item_link:focus .text_container{
+	visibility: visible;
+	opacity: 1;
+}
+
+@media(any-hover: hover){
+	.item:hover{
+		z-index: 10;
+		animation-play-state: paused !important;
+	}
+	.item:hover .text_container{
+		visibility: visible;
+		opacity: 1;
+	}
+}
