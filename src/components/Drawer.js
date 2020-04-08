@@ -16,8 +16,8 @@ class Drawer extends Component {
 	}
 
 	footerJS(){
-		if(window.outerWidth < 768){
-			// mobile screen
+		if(window.outerWidth < 1024){
+			// mobile + tablet screen
 			var innerHeight = window.innerHeight
 			this.setState({windowHeight : 'calc(' + innerHeight + 'px - 3rem)'});
 		}else{
