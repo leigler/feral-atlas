@@ -13,10 +13,11 @@
 	border-top: 1px solid #999;
 	background-color: rgba(250,250,250,0.95);
 	transition: top 0.5s ease-in-out;
+	will-change:top;
 }
 
 #Drawer.open{
-	top: 50vh;
+	top: 50vh !important;
 	overflow-y: scroll;
 }
 
@@ -106,7 +107,7 @@
 @media(max-width: 768px){
 	
 	#Drawer.open{
-		top: 10vh;
+		top: 10vh !important;
 	}
 	
 	#critterArray{

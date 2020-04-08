@@ -6,21 +6,41 @@ class Drawer extends Component {
 		super(props);
 
 		this.state = {
-			drawerOpen : false
+			drawerOpen : false,
+			windowHeight : false
 		}
 	
 	this.openDrawer = this.openDrawer.bind(this);
+	this.footerJS = this.footerJS.bind(this);
 
+	}
+
+	footerJS(){
+		if(window.outerWidth < 768){
+			// mobile screen
+			var innerHeight = window.innerHeight
+			this.setState({windowHeight : 'calc(' + innerHeight + 'px - 3rem)'});
+		}else{
+			this.setState({windowHeight : false})
+		}
 	}
 
 	openDrawer(){
 		this.setState({drawerOpen : !this.state.drawerOpen})
 	}
 
+	componentDidMount(){
+		window.addEventListener("resize", this.footerJS.bind(this))
+		this.footerJS()
+
+	}
 
 	componentDidUpdate(props, prevProps){
 		if(prevProps.critters && prevProps.critters.length === this.props.critters.length){ return }
+	}
 
+	componentWillUnmount(){
+		window.removeEventListener("resize", this.footerJS.bind(this));
 	}
 
 	render(){
@@ -44,6 +64,7 @@ class Drawer extends Component {
 			<nav 
 				id="Drawer"
 				className={(this.state.drawerOpen) ? 'open' : '' }
+				style={ (this.state.windowHeight) ? {top: this.state.windowHeight } : {}}
 			>
 				<header id="DrawerHeader">
 					<button 
