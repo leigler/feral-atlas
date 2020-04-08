@@ -102,6 +102,11 @@
 	#critterArray li{
 		flex-basis: 16.66%;
 	}
+
+	#critterArray li:last-of-type{
+		margin-bottom: 8rem;
+	}
+
 }
 
 @media(max-width: 768px){
