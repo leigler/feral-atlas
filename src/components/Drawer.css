@@ -1,0 +1,120 @@
+#Drawer{
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-content: flex-start;
+	top: calc(100vh - 3rem);
+	height: auto;
+	overflow-y: hidden;
+	padding-top: 0.8rem;
+	padding-bottom: 3rem;
+	width: 100vw;
+	border-top: 1px solid #999;
+	background-color: rgba(250,250,250,0.95);
+	transition: top 0.5s ease-in-out;
+}
+
+#Drawer.open{
+	top: 50vh;
+	overflow-y: scroll;
+}
+
+#DrawerHeader{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+}
+
+#DrawerOpener{
+	outline: 0;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	display: flex;
+	border: none;
+	background-color: transparent;
+	flex-direction: column;
+	cursor: pointer;
+}
+
+.hamburgerLine{
+	width: 2rem;
+	height: 1px;
+	margin-bottom: 0.5rem;
+	background-color: #666;
+}
+
+#critterArray{
+	margin: 0;
+	padding: 0;
+	height: 50vh;
+	box-sizing: border-box;
+	padding-right: 1rem;
+	padding-left: 1rem;
+	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
+	padding-bottom: 2rem;
+	list-style: none;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	align-content: flex-start;
+}
+
+#critterArray li{
+	flex-basis: 12.5%;
+	box-sizing: border-box;
+	padding-left: 0.5rem;
+	padding-right: 0.5rem;
+	margin-bottom: 1rem;
+	text-align: center;
+}
+
+#critterArray li img{
+	width: 100%;
+	max-width: 6rem;
+}
+
+@media(any-hover: hover){
+	#critterArray li img{
+		opacity: 0.7;
+		transition: opacity 0.2s ease-in, transform 0.2s ease-in;
+	}
+
+	#critterArray li:hover img{
+		opacity: 1;	
+		transform: scale(1.05);
+	}
+
+}
+
+#critterArray li:last-of-type{
+	margin-bottom: 4rem;
+}
+
+@media(max-width: 1024px){
+
+	#critterArray li{
+		flex-basis: 16.66%;
+	}
+}
+
+@media(max-width: 768px){
+	
+	#Drawer.open{
+		top: 10vh;
+	}
+	
+	#critterArray{
+		height: 90vh;
+	}
+
+	#critterArray li{
+		flex-basis: 25%;
+	}
+}
+
+

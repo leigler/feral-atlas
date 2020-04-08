@@ -168,27 +168,21 @@ class Surface extends Component {
 	}
 
 
- 	fetchCritters(){
- 		return fetch('/files/critters.json')
- 		.then(r => r.json())
- 		.then(critters => {
- 			if(!Array.isArray(critters)){ return; }
- 			
- 			critters = this.arrayOrder(critters); // shuffle initial order
-
+ 	orderCritters(){
+ 			if(this.props.critters.length === 0){ return }
+ 			let critters = this.arrayOrder(this.props.critters); // shuffle initial order
  			this.setState({critters})
  			this.addActiveCritters()
-
- 		})
  	}
 
   componentDidMount(){
-  	window.addEventListener("resize", this.resize.bind(this));
-  	this.fetchCritters();
+  	window.addEventListener("resize", this.resize.bind(this))
+  	this.orderCritters()
   }
 
-  componentDidUpdate(){
-		
+  componentDidUpdate(props, prevProps){
+  	if(prevProps.critters.length === this.props.critters.length){ return }
+  	this.orderCritters()
   }
 
   componentWillUnmount(){
