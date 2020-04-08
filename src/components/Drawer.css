@@ -25,6 +25,7 @@
 	flex-direction: row;
 	flex-wrap: nowrap;
 	justify-content: center;
+	height: 3rem;
 }
 
 #DrawerOpener{
