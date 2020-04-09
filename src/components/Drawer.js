@@ -10,8 +10,8 @@ class Drawer extends Component {
 			windowHeight : false
 		}
 	
-	this.openDrawer = this.openDrawer.bind(this);
-	this.footerJS = this.footerJS.bind(this);
+		this.openDrawer = this.openDrawer.bind(this);
+		this.footerJS = this.footerJS.bind(this);
 
 	}
 
@@ -44,8 +44,6 @@ class Drawer extends Component {
 	}
 
 	render(){
-
-		console.log(this.props)
 
 		const grid = this.props.critters.map((critter, index) => {
 			return <li key={index}>

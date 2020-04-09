@@ -18,13 +18,9 @@ class App extends Component {
   	return fetch('/files/critters.json')
  		.then(r => r.json())
  		.then(critters => {
- 			console.log(critters)
-
  			if(!Array.isArray(critters)){ return; }
  			this.setState({critters})
-
  		})
-
   }
 
   componentDidMount(){
