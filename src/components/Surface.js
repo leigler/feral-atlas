@@ -13,7 +13,8 @@ class Surface extends Component {
  			recentStartPosition : undefined,
 			recentSide : undefined,
 			windowHeight : window.innerHeight,
-			textPosition : false
+			textPosition : false,
+			paused : false
  		}
 
  		this.animated = this.animated.bind(this);
@@ -25,6 +26,14 @@ class Surface extends Component {
 		if(window.innerHeight !== this.state.windowHeight){
 			this.setState({windowHeight : window.innerHeight})
 		}
+ 	}
+
+ 	play(){
+ 		this.setState({paused : false})
+ 	}
+
+ 	pause(){
+ 		this.setState({paused : true})
  	}
 
  	textPosition(e){
@@ -177,6 +186,8 @@ class Surface extends Component {
 
   componentDidMount(){
   	window.addEventListener("resize", this.resize.bind(this))
+		window.addEventListener("focus", this.play.bind(this))
+  	window.addEventListener("blur", this.pause.bind(this))
   	this.orderCritters()
   }
 
@@ -187,6 +198,8 @@ class Surface extends Component {
 
   componentWillUnmount(){
 		window.removeEventListener("resize", this.resize.bind(this));
+		window.removeEventListener("focus", this.play.bind(this));
+		window.removeEventListener("blur", this.pause.bind(this));
 		
 		if(this.delay !== undefined){
 			clearTimeout(this.delay)
@@ -197,7 +210,7 @@ class Surface extends Component {
   render() {
   	const critters = this.state.activeCritters.map((critter, index) =>
 		  <Critter 
-		  	item={critter.item} 
+		  	item={critter.item}
 		  	seek={critter.seek} 
 		  	index={critter.index}
 		  	animationValues={critter.animationValues}
@@ -208,7 +221,7 @@ class Surface extends Component {
 		);
 
     return (
-      <ul id="Surface" className={(this.state.textPosition) ? '' : 'above'}>
+      <ul id="Surface" className={[(this.state.textPosition) ? '' : 'above', (this.state.paused) ? 'paused' : ''].join(' ')}>
       	{critters}
       </ul>
     );

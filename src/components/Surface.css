@@ -28,3 +28,7 @@ ul, li{
 	padding-left: 0;
 	margin-left: 0;
 }
+
+#Surface.paused *{
+	animation-play-state: paused !important;
+}
