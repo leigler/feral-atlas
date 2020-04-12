@@ -123,9 +123,7 @@ class Surface extends Component {
 
 		}
 
-		return {
-			startPosition, side
-		}
+		return { startPosition, side }
 	}
 
 	addActiveCritters(){
@@ -152,41 +150,53 @@ class Surface extends Component {
 			compiledCritters.push({
 				item : item,
 				index: index,
-				seek : (index < 9) ? true : false,
+				seek : (index < 7) ? true : false,
 				animationValues : this.critterAnimationValues(startPosition, side)
 			})
 
 		})
 
 
-		const activeCritters = compiledCritters.slice(0,18);
-		const delayedCritters = compiledCritters.slice(18, 27);
+		const activeCritters = compiledCritters.slice(0,14);
+		const firstDelayedCritters = compiledCritters.slice(14, 21);
+		const secondDelayedCritters = compiledCritters.slice(21, 27);
 		
 		this.setState({activeCritters, recentStartPosition, recentSide})
 
-		this.delay = setTimeout(() => {
+		this.firstDelay = setTimeout(() => {
+					console.log("first")
 					this.setState({ 
 						activeCritters: [
-							...this.state.activeCritters.concat(delayedCritters) 
+							...this.state.activeCritters.concat(firstDelayedCritters) 
 						] 
 					})
-		}, 7000)
+		}, 15000)
+
+		this.secondDelay = setTimeout(() => {
+					console.log("second")
+					this.setState({ 
+						activeCritters: [
+							...this.state.activeCritters.concat(secondDelayedCritters) 
+						] 
+					})
+		}, 30000)
 
 	}
 
 
  	orderCritters(){
- 			if(this.props.critters.length === 0){ return }
- 			let critters = this.arrayOrder(this.props.critters); // shuffle initial order
- 			this.setState({critters})
- 			this.addActiveCritters()
+		if(this.props.critters.length === 0){ return }
+
+		let critters = this.arrayOrder(this.props.critters); // shuffle initial order
+		this.setState({critters})
+		this.addActiveCritters()
  	}
 
   componentDidMount(){
   	window.addEventListener("resize", this.resize.bind(this))
 		// window.addEventListener("focus", this.play.bind(this))
   // 	window.addEventListener("blur", this.pause.bind(this))
-  	this.orderCritters()
+  	// this.orderCritters()
   }
 
   componentDidUpdate(props, prevProps){
@@ -199,8 +209,12 @@ class Surface extends Component {
 		// window.removeEventListener("focus", this.play.bind(this));
 		// window.removeEventListener("blur", this.pause.bind(this));
 		
-		if(this.delay !== undefined){
-			clearTimeout(this.delay)
+		if(this.firstDelay !== undefined){
+			clearTimeout(this.firstDelay)
+		}
+
+		if(this.secondDelay !== undefined){
+			clearTimeout(this.secondDelay)
 		}
 		
   }
