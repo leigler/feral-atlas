@@ -6,6 +6,8 @@ class Surface extends Component {
   constructor(props) {
  		super(props);
 
+ 		console.log("constructor")
+
  		this.state = {
  			critters : [],
  			activeCritters : [],
@@ -127,6 +129,7 @@ class Surface extends Component {
 	}
 
 	addActiveCritters(){
+
 		let compiledCritters = [], recentStartPosition, recentSide;
 
 		this.state.critters.forEach((item, index) => {	
@@ -188,8 +191,7 @@ class Surface extends Component {
 		if(this.props.critters.length === 0){ return }
 
 		let critters = this.arrayOrder(this.props.critters); // shuffle initial order
-		this.setState({critters})
-		this.addActiveCritters()
+		this.setState({critters}, this.addActiveCritters)
  	}
 
   componentDidMount(){
@@ -199,8 +201,8 @@ class Surface extends Component {
   	// this.orderCritters()
   }
 
-  componentDidUpdate(props, prevProps){
-  	if(prevProps.critters.length === this.props.critters.length){ return }
+  componentDidUpdate(prevProps, prevState){
+  	if(this.props.critters.length === prevProps.critters.length){ return }
   	this.orderCritters()
   }
 

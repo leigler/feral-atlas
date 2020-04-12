@@ -12,7 +12,7 @@ const Critter = (props) => {
 
   return <li 
 		className={"item " + sideArray[side][0] + startPosition} 
-		style={{animation: `${sideArray[side][1]}${leaning} linear ${speed}s ${delay}s `}} 
+		style={{animation: `${sideArray[side][1]}${leaning} ${speed}s linear ${delay}s `}} 
 		onAnimationEnd={(e) => { if(e.animationName.includes("bobbing")){ return; } props.onAnimationEnd(props.index) } }
 		onMouseOver={props.onMouseOver}
 		id={"item-" + props.index}>
@@ -22,7 +22,7 @@ const Critter = (props) => {
 				className="item_image" 
 				alt={props.item.title}
 				src={props.item.imagepath}
-				style={{animation: "bobbing" + bobbing + " ease-in-out " + bobbingSpeed +"s " + bobbingDelay + "s"}}
+				style={{animation: "bobbing" + bobbing + " " + bobbingSpeed +"s ease-in-out " + bobbingDelay + "s infinite normal none running"}}
 				/>
 			<aside className="text_container">
 				<h1 className="item_title item_text">{props.item.title}</h1>
