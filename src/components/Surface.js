@@ -77,8 +77,6 @@ class Surface extends Component {
 
 	loadNewCritter(index){
 		const item = this.state.critters[this.state.itemTracker]
-		
-
 		const {startPosition, side} = this.cyclingPositions(false);
 
 		return {
@@ -186,8 +184,8 @@ class Surface extends Component {
 
   componentDidMount(){
   	window.addEventListener("resize", this.resize.bind(this))
-		window.addEventListener("focus", this.play.bind(this))
-  	window.addEventListener("blur", this.pause.bind(this))
+		// window.addEventListener("focus", this.play.bind(this))
+  // 	window.addEventListener("blur", this.pause.bind(this))
   	this.orderCritters()
   }
 
@@ -198,8 +196,8 @@ class Surface extends Component {
 
   componentWillUnmount(){
 		window.removeEventListener("resize", this.resize.bind(this));
-		window.removeEventListener("focus", this.play.bind(this));
-		window.removeEventListener("blur", this.pause.bind(this));
+		// window.removeEventListener("focus", this.play.bind(this));
+		// window.removeEventListener("blur", this.pause.bind(this));
 		
 		if(this.delay !== undefined){
 			clearTimeout(this.delay)
