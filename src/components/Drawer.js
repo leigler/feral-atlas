@@ -35,10 +35,6 @@ class Drawer extends Component {
 
 	}
 
-	componentDidUpdate(props, prevProps){
-		if(prevProps.critters && prevProps.critters.length === this.props.critters.length){ return }
-	}
-
 	componentWillUnmount(){
 		window.removeEventListener("resize", this.footerJS.bind(this));
 	}

@@ -6,10 +6,8 @@ class Surface extends Component {
   constructor(props) {
  		super(props);
 
- 		console.log("constructor")
 
  		this.state = {
- 			critters : [],
  			activeCritters : [],
  			itemTracker : 27,
  			recentStartPosition : undefined,
@@ -46,18 +44,6 @@ class Surface extends Component {
 		}
 	}
 
- 	arrayOrder(array){
-		var i = array.length, k , temp;
-		while(--i > 0){
-			k = Math.floor(Math.random() * (i+1));
-			temp = array[k];
-			array[k] = array[i];
-			array[i] = temp;
-		}
-	  // shuffled array:
-		return array;
-	}	
-
 	critterAnimationValues(startPosition, side){
 		// for all animations:
 		// 1-3 position positive translations
@@ -78,7 +64,7 @@ class Surface extends Component {
 	}
 
 	loadNewCritter(index){
-		const item = this.state.critters[this.state.itemTracker]
+		const item = this.props.critters[this.state.itemTracker]
 		const {startPosition, side} = this.cyclingPositions(false);
 
 		return {
@@ -93,10 +79,10 @@ class Surface extends Component {
 
 		// track location in array
 	  let itemTracker = this.state.itemTracker + 1;
-	  if(itemTracker > this.state.critters.length - 1){
+	  if(itemTracker > this.props.critters.length - 1){
 	  	itemTracker = 0;
-	  	const critters = this.arrayOrder(this.state.critters); // shuffle initial order
- 			this.setState({critters: critters})
+	  	// shuffle initial order
+ 			this.props.shuffleArray(this.props.critters)
 	  }
 
 	  const newCritter = this.loadNewCritter(critterIndex);
@@ -132,7 +118,7 @@ class Surface extends Component {
 
 		let compiledCritters = [], recentStartPosition, recentSide;
 
-		this.state.critters.forEach((item, index) => {	
+		this.props.critters.forEach((item, index) => {	
 			if(index > 27){ return; }
 
 			let {startPosition, side } = this.cyclingPositions(true);
@@ -167,7 +153,7 @@ class Surface extends Component {
 		this.setState({activeCritters, recentStartPosition, recentSide})
 
 		this.firstDelay = setTimeout(() => {
-					console.log("first")
+	
 					this.setState({ 
 						activeCritters: [
 							...this.state.activeCritters.concat(firstDelayedCritters) 
@@ -176,7 +162,7 @@ class Surface extends Component {
 		}, 15000)
 
 		this.secondDelay = setTimeout(() => {
-					console.log("second")
+	
 					this.setState({ 
 						activeCritters: [
 							...this.state.activeCritters.concat(secondDelayedCritters) 
@@ -186,24 +172,15 @@ class Surface extends Component {
 
 	}
 
-
- 	orderCritters(){
-		if(this.props.critters.length === 0){ return }
-
-		let critters = this.arrayOrder(this.props.critters); // shuffle initial order
-		this.setState({critters}, this.addActiveCritters)
- 	}
-
   componentDidMount(){
-  	window.addEventListener("resize", this.resize.bind(this))
-		// window.addEventListener("focus", this.play.bind(this))
-  // 	window.addEventListener("blur", this.pause.bind(this))
-  	// this.orderCritters()
+  	window.addEventListener("resize", this.resize.bind(this));
+		// window.addEventListener("focus", this.play.bind(this));
+  	// 	window.addEventListener("blur", this.pause.bind(this));
   }
 
   componentDidUpdate(prevProps, prevState){
-  	if(this.props.critters.length === prevProps.critters.length){ return }
-  	this.orderCritters()
+  	if(this.props.critters.length === 0 || this.props.critters.length === prevProps.critters.length){ return }
+  	this.addActiveCritters()
   }
 
   componentWillUnmount(){
