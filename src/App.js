@@ -28,7 +28,9 @@ class App extends Component {
       array[i] = temp;
     }
     // shuffled array:
-    this.setState({surfaceList : array})
+    this.setState({surfaceList : array}, () => {
+      this.alphaArray(critters)
+    })
   } 
 
   alphaArray(critters){
@@ -53,7 +55,6 @@ class App extends Component {
       if(!Array.isArray(critters)){ return; }
       
       this.shuffleArray(critters)
-      this.alphaArray(critters)
  		})
   }
 
