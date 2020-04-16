@@ -7,7 +7,7 @@ const Critter = (props) => {
   // list item gets one class for animation keyframes
 	const sideArray = [["top horizontal", "down"], ["bottom horizontal", "up"], ["left vertical", "right"], ["right vertical", "left"]];
 	// if seek is true, it means initial load places item in center
-	if(props.seek){ delay = (-1 * delay) - 10 }
+	if(props.seek){ delay = (-1 * delay) - 13 }
 
 
   return <li 

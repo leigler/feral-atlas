@@ -55,10 +55,10 @@ class Surface extends Component {
 
 		// 2 possible animations per side and direction, upper lower and middle
 		// item gets inline styles for speed
-		let speed = 60 + Math.round(Math.random()*10),
-				delay = Math.round(Math.random()*10),
-				bobbingSpeed = 10 + Math.round(Math.random()*5),
-				bobbingDelay = Math.round(Math.random()*15);
+		let speed = 80 + Math.round(Math.random()*10),
+				delay = Math.round(Math.random()*13),
+				bobbingSpeed = 13 + Math.round(Math.random()*5),
+				bobbingDelay = Math.round(Math.random()*13);
 
 		return {startPosition, side, lean, leaning, bobbing, speed, delay, bobbingSpeed, bobbingDelay}
 	}
@@ -159,7 +159,7 @@ class Surface extends Component {
 							...this.state.activeCritters.concat(firstDelayedCritters) 
 						] 
 					})
-		}, 15000)
+		}, 20000)
 
 		this.secondDelay = setTimeout(() => {
 	
@@ -168,7 +168,7 @@ class Surface extends Component {
 							...this.state.activeCritters.concat(secondDelayedCritters) 
 						] 
 					})
-		}, 30000)
+		}, 40000)
 
 	}
 
